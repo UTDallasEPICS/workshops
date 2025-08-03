@@ -1,642 +1,89 @@
 <script setup>
-const workshops = [
-  {
-    date: "Online",
-    title: "Browser Dev Tools",
-    time: "20-minute video",
+import initialWorkshops from "~/assets/data/workshops.json";
+
+const workshops = ref(
+  initialWorkshops.map((w) => ({
+    ...w,
+    id: w.id || Date.now() + Math.random(),
+  }))
+);
+
+const isModalOpen = ref(false);
+const modalType = ref("add"); // 'add' or 'edit'
+const selectedWorkshop = ref(null);
+
+const workshopForm = ref({
+  date: "",
+  title: "",
+  time: "",
+  location: "",
+  recordingLink: "",
+  note: "",
+  description: "",
+  presenter: "",
+});
+
+const route = useRoute();
+const rc = useRuntimeConfig();
+const EDITING_CODE = rc.public.EDITING_CODE || "";
+
+const isEditingMode = computed(() => route.query.code === EDITING_CODE);
+
+const openAddModal = () => {
+  modalType.value = "add";
+  selectedWorkshop.value = null;
+  workshopForm.value = {
+    date: "",
+    title: "",
+    time: "",
     location: "",
-    recordingLink: "Link",
-    note: "WATCH FIRST! If working on a CS project - a must see",
-    description: "An introduction to the most critical tool for web developers",
-    presenter: "Joseph Nakonecznyj",
-  },
-  {
-    date: "Online",
-    title: "Bash",
-    time: "16-minute video",
-    location: "",
-    recordingLink: "Link",
-    note: "If working on a CS project - a must see",
-    description: "Short introduction to Bash scripting language",
-    presenter: "Joseph Nakonecznyj",
-  },
-  {
-    date: "Online",
-    title: "Git",
-    time: "12-minute video",
-    location: "",
-    recordingLink: "Link",
-    note: "If working on a CS project - a must see",
-    description: "Brief overview of Git",
-    presenter: "Joseph Nakonecznyj",
-  },
-  {
-    date: "Online",
-    title: "Github",
-    time: "10-minute video",
-    location: "",
-    recordingLink: "Link",
-    note: "If working on a CS project - a must see",
-    description: "Introduction/overview of Github",
-    presenter: "Joseph Nakonecznyj",
-  },
-  {
-    date: "Online",
-    title: "Network",
-    time: "15-minute video",
-    location: "",
-    recordingLink: "Link",
-    note: "If working on a CS project - a must see",
-    description:
-      "Brief Introduction of client servers, databases, front end, back end, etc.",
-    presenter: "Joseph Nakonecznyj",
-  },
-  {
-    date: "22-Jan",
-    title: "Git and GitHub Basics in person",
-    time: "7:00 PM",
-    location: "SPN 1.121",
     recordingLink: "",
     note: "",
-    description:
-      "All the basic git concepts, so that will be able to make best use of git for their collaborative work. ",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "23-Jan",
-    title: "Git and GitHub Basics in person",
-    time: "5:30 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "All the basic git concepts, so that will be able to make best use of git for their collaborative work. ",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "24-Jan",
-    title: "Clean Code",
-    time: "5:30 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Clean code principles based on the book by Robert Cecil Martin. What Clean Code is. Functions. Comments. Formatting. Objects and data structure.",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "25-Jan",
-    title: "Clean Code",
-    time: "5:30 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Clean code principles based on the book by Robert Cecil Martin. What Clean Code is. Functions. Comments. Formatting. Objects and data structure.",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "Febru",
-    title: "Database Design I",
-    time: "7:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "Recommended if working on a database project",
-    description:
-      "Introduction and appplications of databases. Difference between SQL and No-SQL DB. Design using ER diagram.",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "30-Jan",
-    title: "Database Design I",
-    time: "5:30 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Introduction and appplications of databases. Difference between SQL and No-SQL DB. Design using ER diagram. ",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "31-Jan",
-    title: "Database Design II",
-    time: "5:30 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Basic syntaxes of postgresql and will convert the ER diagram in DB-I workshop to actual SQL tables. ",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "1-Feb",
-    title: "Database Design II",
-    time: "5:30 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Basic syntaxes of postgresql and will convert the ER diagram in DB-I workshop to actual SQL tables. ",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "2-Feb",
-    title: "Intro to Computer Aided Design (CAD) I",
-    time: "7:00 PM",
-    location: "SPN 1.114",
-    recordingLink: "",
-    note: "",
-    description:
-      "What is CAD. How to obtain and install Fusion 360 and how to use Fusion 360 as well as online resources and tutorials.",
-    presenter: "Danyal Syed",
-  },
-  {
-    date: "5-Feb",
-    title: "Introduction to Java",
-    time: "5:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Introduction, methods, classes, OOP's concepts, interfaces, wrapper classes, keywords, access modifiers, constructors etc",
-    presenter: "Margi Nasit",
-  },
-  {
-    date: "5-Feb",
-    title: "Nuxt & Vue",
-    time: "7:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Overview of using Nuxt and Vue to build web applications, covering API and frontend implementation",
-    presenter: "Joseph Nakonecznyj",
-  },
-  {
-    date: "6-Feb",
-    title: "LeetCode",
-    time: "5:30 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description: "Solve few LeetCode SQL challenges using PostgreSQL",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "6-Feb",
-    title: "FIGMA",
-    time: "7:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Introduction to the software, how to use , tools, components, prototyping, auto layout, designing the website etc.",
-    presenter: "Margi Nasit",
-  },
-  {
-    date: "7-Feb",
-    title: "CRUD using Express",
-    time: "5:30 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Basic setup and how to make CRUD (create, read, update, delete) operations using the PostgreSQL with Prisma as ORM (object relational mapping)",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "8-Feb",
-    title: "CRUD using Express",
-    time: "5:30 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Basic setup and how to make CRUD (create, read, update, delete) operations using the PostgreSQL with Prisma as ORM (object relational mapping)",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "8-Feb",
-    title: "System Architecture & UI Design",
-    time: "7:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Designing database schemas, APIS, and UI components. Also covers structuring user workflows",
-    presenter: "Joseph Nakonecznyj",
-  },
-  {
-    date: "9-Feb",
-    title: "Intro to Computer Aided Design (CAD) II",
-    time: "7:00 PM",
-    location: "SPN 1.114",
-    recordingLink: "",
-    note: "",
-    description:
-      "More in depth overview of Fusion 360 features, includin: simulations, assemblies, and rendering.",
-    presenter: "Danyal Syed",
-  },
-  {
-    date: "12-Feb",
-    title: "FIGMA",
-    time: "5:30 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Introduction to FIGMA - web-based graphics editing and user interface design app",
-    presenter: "Mouaadh Bellaouar",
-  },
-  {
-    date: "12-Feb",
-    title: "System Architecture & UI Design",
-    time: "7:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Designing database schemas, APIS, and UI components. Also covers structuring user workflows",
-    presenter: "Joseph Nakonecznyj",
-  },
-  {
-    date: "13-Feb",
-    title: "Marketing your EPICS Experience for Internships",
-    time: "5:30 PM",
-    location: "SPN 2.220",
-    recordingLink: "",
-    note: "",
-    description:
-      "This workshop will help you identify and discuss key skills you've learned from EPICS. You will learn how to market and sell your EPICS experience in a way that resonates with future employers and improves your interview skills. Come ready with a top internship/ job choice in mind so we can help you market your EPICS skills directly to a job / internship opening. Or, just come to listen and gain general knowledge about how your time in EPICS can benefit you during job applications and interviews.",
-    presenter: "Dr. Aird",
-  },
-  {
-    date: "13-Feb",
-    title: "CRUD using React",
-    time: "5:30 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Develop UI in react for the API’s we have developed in CRUD using React. ",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "13-Feb",
-    title: "Nuxt & Vue",
-    time: "7:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Overview of using Nuxt and Vue to build web applications, covering API and frontend implementation",
-    presenter: "Joseph Nakonecznyj",
-  },
-  {
-    date: "16-Feb",
-    title: "Intro to Additive Manufacturing",
-    time: "7:00 PM",
-    location: "SPN 1.114",
-    recordingLink: "",
-    note: "",
-    description:
-      "We will cover what additive manufacturing is, different styles, different types of material. How do you get something 3D printed? How do we use additive manufacturing in EPICS? Resources at the studio for 3D printing.",
-    presenter: "Danyal Syed",
-  },
-  {
-    date: "19-Feb",
-    title: "State Management in React",
-    time: "7:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description: "We will cover all 3 techniques (props, redux and context)",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "20-Feb",
-    title: "SQL Server and Azure SQL",
-    time: "4:30 PM",
-    location: "Virtual",
-    recordingLink: "http://forms.office.com/r/gYmZWLnQ33",
-    note: "Register through this link:",
-    description:
-      "Get started with building web applications using databases and APIs. Go through how to use SQL Server/Azure SQL for a hackathon. Participate in Q&A with the Microsoft Azure Data product team.",
+    description: "",
     presenter: "",
-  },
-  {
-    date: "20-Feb",
-    title: "State Management in React",
-    time: "5:30 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description: "We will cover all 3 techniques (props, redux and context)",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "21-Feb",
-    title: "Intro to Electronics",
-    time: "6:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Circuits, components, and concepts. Concepts of voltage, current, resistance, and power, and how these behave in series and parallel configurations. Components found in most circuits (resistors, capacitors, inductors, diodes, transistors), elementary circuits (voltage dividers, amplifiers, buck/boost converters, etc.) as well as how these components are used in practical applications by providing examples from actual devices found in commercial products and other hobbyist projects. It will also go over methods of powering a device, and what to consider when choosing a power solution. ",
-    presenter: "Harold Foster",
-  },
-  {
-    date: "22-Feb",
-    title: "Introduction to ES6",
-    time: "5:30 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Introducing ES6, syntax, functions, restructuring, classes, iterators and generators, promises, string and array methods.",
-    presenter: "Margi Nasit",
-  },
-  {
-    date: "23-Feb",
-    title: "Intro to Design for Additive Manufacturing",
-    time: "7:00 PM",
-    location: "SPN 1.114",
-    recordingLink: "",
-    note: "",
-    description:
-      "We will cover how to design for additive manufacturing, including tolerances, holes, overhangs, and other general tips and tricks.",
-    presenter: "Danyal Syed",
-  },
-  {
-    date: "26-Feb",
-    title: "FIGMA",
-    time: "5:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Introduction to the software, how to use , tools, components, prototyping, auto layout, designing the website etc.",
-    presenter: "Margi Nasit",
-  },
-  {
-    date: "28-Feb",
-    title: "Intro to Soldering",
-    time: "6:00 PM",
-    location: "SPN 1.114",
-    recordingLink: "",
-    note: "",
-    description:
-      "Introductory course into soldering. Will demonstrate techniques to achieve clean and robust solder joints for both through hole and surface mount components. The workshop will cover the different types of soldering (soldering with an iron and soldering with paste) and the reasons to choose one over the other. A demonstration of soldering through hole components and surface mount components will be led. There will also be a demonstration on how to desolder components from a board. ",
-    presenter: "Harold Foster",
-  },
-  {
-    date: "29-Feb",
-    title: "Intro to Electronics",
-    time: "5:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Circuits, components, and concepts. Concepts of voltage, current, resistance, and power, and how these behave in series and parallel configurations. Components found in most circuits (resistors, capacitors, inductors, diodes, transistors), elementary circuits (voltage dividers, amplifiers, buck/boost converters, etc.) as well as how these components are used in practical applications by providing examples from actual devices found in commercial products and other hobbyist projects. It will also go over methods of powering a device, and what to consider when choosing a power solution. ",
-    presenter: "Harold Foster",
-  },
-  {
-    date: "1-Mar",
-    title: "Intro to Computer Aided Design (CAD) I",
-    time: "7:00 PM",
-    location: "SPN 1.114",
-    recordingLink: "",
-    note: "",
-    description:
-      "What is CAD. How to obtain and install Fusion 360 and how to use Fusion 360 as well as online resources and tutorials.",
-    presenter: "Danyal Syed",
-  },
-  {
-    date: "4-Mar",
-    title: "Introduction to ES6",
-    time: "5:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Introducing ES6, syntax, functions, restructuring, classes, iterators and generators, promises, string and array methods.",
-    presenter: "Margi Nasit",
-  },
-  {
-    date: "4-Mar",
-    title: "LeetCode",
-    time: "7:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description: "Solve few LeetCode SQL challenges using PostgreSQL",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "6-Mar",
-    title: "PCB",
-    time: "6:00 PM",
-    location: "SPN 1.114",
-    recordingLink: "",
-    note: "",
-    description:
-      "An example of 2 layer printed circuit board (PCB) design in KiCAD will be done. We will lay out a circuit schematic and then go through the process of converting the schematic to a PCB.",
-    presenter: "Harold Foster",
-  },
-  {
-    date: "6-Mar",
-    title: "Collecting Data for Machine Learning Models",
-    time: "7:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Learn the fundamentals of machine learning - from clustering to neural networks. This workshop will also focus on training and evaluation of machine learning models (gathering training data, splitting up training data into subsets, finding quality training data, data augmentation)",
-    presenter: "Dr. Aird",
-  },
-  {
-    date: "7-Mar",
-    title: "Intro to Soldering",
-    time: "6:00 PM",
-    location: "SPN 1.114",
-    recordingLink: "",
-    note: "",
-    description:
-      "Introductory course into soldering. Will demonstrate techniques to achieve clean and robust solder joints for both through hole and surface mount components. The workshop will cover the different types of soldering (soldering with an iron and soldering with paste) and the reasons to choose one over the other. A demonstration of soldering through hole components and surface mount components will be led. There will also be a demonstration on how to desolder components from a board. ",
-    presenter: "Harold Foster",
-  },
-  {
-    date: "8-Mar",
-    title: "Intro to Computer Aided Design (CAD) II",
-    time: "7:00 PM",
-    location: "SPN 1.114",
-    recordingLink: "",
-    note: "",
-    description:
-      "More in depth overview of Fusion 360 features, includin: simulations, assemblies, and rendering.",
-    presenter: "Danyal Syed",
-  },
-  {
-    date: "18-Mar",
-    title: "Cloud Services & Deploying Code",
-    time: "7:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "Very much recommended for teams exploring cloud services",
-    description:
-      "An overview of cloud services focusing on AWS and deploying your projects - git, github, AWS, CDNs, domains",
-    presenter: "Joseph Nakonecznyj",
-  },
-  {
-    date: "20-Mar",
-    title: "PCB",
-    time: "6:00 PM",
-    location: "SPN 1.114",
-    recordingLink: "",
-    note: "",
-    description:
-      "An example of 2 layer printed circuit board (PCB) design in KiCAD will be done. We will lay out a circuit schematic and then go through the process of converting the schematic to a PCB.",
-    presenter: "Max Steele",
-  },
-  {
-    date: "21-Mar",
-    title: "Cloud Services & Deploying Code",
-    time: "7:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "Very much recommended for teams exploring cloud services",
-    description:
-      "An overview of cloud services focusing on AWS and deploying your projects - git, github, AWS, CDNs, domains",
-    presenter: "Joseph Nakonecznyj",
-  },
-  {
-    date: "",
-    title: "IEEE Soldering",
-    time: "5:00 PM",
-    location: "SPN 2.220",
-    recordingLink: "",
-    note: "Reapeted every other Friday",
-    description: "Begginer friendly",
-    presenter: "IEEE",
-  },
-  {
-    date: "",
-    title: "IEEE Microcontroler",
-    time: "5:00 PM",
-    location: "SPN 2.220",
-    recordingLink: "",
-    note: "Reapeted every other Thursday",
-    description: "Begginer friendly",
-    presenter: "IEEE",
-  },
-  {
-    date: "22-Mar",
-    title: "Intro to Additive Manufacturing",
-    time: "5:00 PM",
-    location: "SPN 1.114",
-    recordingLink: "",
-    note: "",
-    description:
-      "We will cover what additive manufacturing is, different styles, different types of material. How do you get something 3D printed? How do we use additive manufacturing in EPICS? Resources at the studio for 3D printing.",
-    presenter: "Danyal Syed",
-  },
-  {
-    date: "22-Mar",
-    title: "Intro to Design for Additive Manufacturing",
-    time: "7:00 PM",
-    location: "SPN 1.114",
-    recordingLink: "",
-    note: "",
-    description:
-      "We will cover how to design for additive manufacturing, including tolerances, holes, overhangs, and other general tips and tricks.",
-    presenter: "Danyal Syed",
-  },
-  {
-    date: "25-Mar",
-    title: "CRUD using React",
-    time: "7:30pm",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "Develop UI in react for the API’s we have developed in CRUD using React. ",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "",
-    title: "Go Introduction",
-    time: "7:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "We will cover all the syntax that is needed to get started with Go",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "",
-    title: "Go Introduction",
-    time: "5:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description:
-      "We will cover all the syntax that is needed to get started with Go",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "",
-    title: "LeetCode with Go",
-    time: "5:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description: "Solve few leetcode questions in Go.",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "29-Feb",
-    title: "LeetCode with Go",
-    time: "6:00 PM",
-    location: "SPN 1.121",
-    recordingLink: "",
-    note: "",
-    description: "Solve few leetcode questions in go. ",
-    presenter: "Navaneeth Buddi",
-  },
-  {
-    date: "T, TH and Sat.",
-    title: "Machine Shop Training",
-    time: "T &TH: 5pm-9pm Sat: 12pm-4pm Each training session last between 1-2 hours",
-    location: "SPN 1.110",
-    recordingLink: "",
-    note: "Must have completed saftey training via Bioraft Very much recommended if planning to use the machine shop now or in the future",
-    description:
-      "Each session counts as one workshop. 5 session series (1 session per day) basic tool traininig done in shop. Must provide safety training certificates to Gene prior to coming to basic training. Long pants and closed shoes must be worn.",
-    presenter: "Gene Woten",
-  },
-  {
-    date: "",
-    title: "North Lab Machine Shop",
-    time: "By appointment. After completing the online training, send email to Andrew Bittner to schedule training. andrew.bittner@utdallas.edu",
-    location: "North Lab (NL)",
-    recordingLink: "",
-    note: "Very much recommended if planning to use the North Lab Machine Shop now or in the future",
-    description:
-      "Prior to scheduled a training session, students must complete the following BioRaft online training: 1) Hand and Power Tool Safety Course 2) General Safety Course 3) Personal Protective Equipment Course 4) Machine Shop Safety and Procedures Course",
-    presenter: "Andrew Bittner",
-  },
-  {
-    date: "Online",
-    title: "Linkedln Learning",
-    time: "Online",
-    location: "https://www.utdallas.edu/library/utdlynda/",
-    recordingLink: "",
-    note: "very much recommended when looking to learn topics not offered through our workshops",
-    description: "Find online courses based on your need",
-    presenter: "UT Dallas",
-  },
-];
+  };
+  isModalOpen.value = true;
+};
+
+const openEditModal = (workshop) => {
+  modalType.value = "edit";
+  selectedWorkshop.value = workshop;
+  workshopForm.value = { ...workshop };
+  isModalOpen.value = true;
+};
+
+const saveWorkshop = () => {
+  if (modalType.value === "add") {
+    const newWorkshop = {
+      ...workshopForm.value,
+      id: Date.now() + Math.random(),
+    };
+    workshops.value.push(newWorkshop);
+  } else if (modalType.value === "edit") {
+    const index = workshops.value.findIndex(
+      (w) => w.id === selectedWorkshop.value.id
+    );
+    if (index !== -1) {
+      workshops.value[index] = {
+        ...workshopForm.value,
+        id: selectedWorkshop.value.id,
+      };
+    }
+  }
+  isModalOpen.value = false;
+};
+
+const deleteWorkshop = (workshopToDelete) => {
+  if (confirm(`Are you sure you want to delete "${workshopToDelete.title}"?`)) {
+    workshops.value = workshops.value.filter(
+      (w) => w.id !== workshopToDelete.id
+    );
+  }
+};
+
+const closeModal = () => {
+  isModalOpen.value = false;
+};
 </script>
 
 <template>
@@ -646,6 +93,29 @@ const workshops = [
       This list is updated when workshops are added or dates change. Please
       check this page often.
     </p>
+
+    <!-- Add New Workshop button - only visible in editing mode -->
+    <div v-if="isEditingMode" class="mb-4 flex justify-end">
+      <button
+        @click="openAddModal"
+        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+      >
+        <svg
+          class="-ml-1 mr-2 h-5 w-5"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.25a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        Add New Workshop
+      </button>
+    </div>
 
     <div class="overflow-x-auto shadow-md sm:rounded-lg">
       <table
@@ -663,12 +133,14 @@ const workshops = [
             <th scope="col" class="px-6 py-3">Note</th>
             <th scope="col" class="px-6 py-3">Workshop Description</th>
             <th scope="col" class="px-6 py-3">Presenter</th>
+            <!-- Actions column only visible in editing mode -->
+            <th v-if="isEditingMode" scope="col" class="px-6 py-3">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr
-            v-for="(workshop, index) in workshops"
-            :key="index"
+            v-for="workshop in workshops"
+            :key="workshop.id"
             class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
           >
             <td
@@ -695,9 +167,231 @@ const workshops = [
             <td class="px-6 py-4">{{ workshop.note }}</td>
             <td class="px-6 py-4">{{ workshop.description }}</td>
             <td class="px-6 py-4">{{ workshop.presenter }}</td>
+            <!-- Edit/Delete buttons only visible in editing mode -->
+            <td
+              v-if="isEditingMode"
+              class="px-6 py-4 flex items-center space-x-2"
+            >
+              <button
+                @click="openEditModal(workshop)"
+                class="inline-flex items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                aria-label="Edit"
+                title="Edit"
+              >
+                <svg
+                  class="h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5.433 13.917l1.326-4.508a.75.75 0 011.174-.298l.635.635a.75.75 0 001.06-.006l6.762-6.762a.75.75 0 00-1.06-1.06L9.605 10.04a.75.75 0 00-.006 1.06l.635.635a.75.75 0 01-.298 1.174l-4.508 1.326a.75.75 0 01-.913-.913zM6.5 16.5H4.25A2.25 2.25 0 012 14.25V4.75A2.25 2.25 0 014.25 2.5h9.5A2.25 2.25 0 0116 4.75v2.25a.75.75 0 001.5 0V4.75A3.75 3.75 0 0013.75 1H4.25A3.75 3.75 0 00.5 4.75v9.5A3.75 3.75 0 004.25 18.5h2.25a.75.75 0 000-1.5z"
+                  />
+                </svg>
+              </button>
+              <button
+                @click="deleteWorkshop(workshop)"
+                class="inline-flex items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                aria-label="Delete"
+                title="Delete"
+              >
+                <svg
+                  class="h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.58.274-2.333.586a.75.75 0 00-.737 1.107L4.547 9.5H15.453l1.838-3.614a.75.75 0 00-.737-1.107c-.753-.312-1.538-.509-2.333-.586V3.75C14 2.134 12.866 1 11.25 1h-2.5zM10 11.25a.75.75 0 00-1.5 0v3.5a.75.75 0 001.5 0v-3.5z"
+                    clip-rule="evenodd"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M4.505 11.147A.75.75 0 004 11.75v2.5c0 .138-.112.25-.25.25H2.75a.75.75 0 00-.75.75v.5c0 .414.336.75.75.75h14.5a.75.75 0 00.75-.75v-.5a.75.75 0 00-.75-.75h-1a.25.25 0 01-.25-.25v-2.5a.75.75 0 00-.455-.603L12.5 9h-5L4.505 11.147zM6.5 11.25a.75.75 0 00-1.5 0v3.5a.75.75 0 001.5 0v-3.5z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <!-- Custom Modal Overlay and Content -->
+    <div
+      v-if="isModalOpen"
+      class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-4"
+    >
+      <div
+        class="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-lg w-full p-6"
+      >
+        <!-- Modal Header -->
+        <div
+          class="flex items-center justify-between pb-4 border-b border-gray-200 dark:border-gray-700"
+        >
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            {{ modalType === "add" ? "Add New Workshop" : "Edit Workshop" }}
+          </h3>
+          <button
+            @click="closeModal"
+            class="p-1 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+            aria-label="Close"
+          >
+            <svg
+              class="h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Workshop Form -->
+        <form @submit.prevent="saveWorkshop" class="space-y-4 pt-4">
+          <div>
+            <label
+              for="date"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-200"
+              >Date</label
+            >
+            <input
+              type="text"
+              id="date"
+              v-model="workshopForm.date"
+              required
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            />
+          </div>
+
+          <div>
+            <label
+              for="title"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-200"
+              >Title</label
+            >
+            <input
+              type="text"
+              id="title"
+              v-model="workshopForm.title"
+              required
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            />
+          </div>
+
+          <div>
+            <label
+              for="time"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-200"
+              >Time</label
+            >
+            <input
+              type="text"
+              id="time"
+              v-model="workshopForm.time"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            />
+          </div>
+
+          <div>
+            <label
+              for="location"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-200"
+              >Location</label
+            >
+            <input
+              type="text"
+              id="location"
+              v-model="workshopForm.location"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            />
+          </div>
+
+          <div>
+            <label
+              for="recordingLink"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-200"
+              >Recording Link</label
+            >
+            <input
+              type="text"
+              id="recordingLink"
+              v-model="workshopForm.recordingLink"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            />
+          </div>
+
+          <div>
+            <label
+              for="note"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-200"
+              >Note</label
+            >
+            <textarea
+              id="note"
+              v-model="workshopForm.note"
+              rows="3"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            ></textarea>
+          </div>
+
+          <div>
+            <label
+              for="description"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-200"
+              >Workshop Description</label
+            >
+            <textarea
+              id="description"
+              v-model="workshopForm.description"
+              rows="3"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            ></textarea>
+          </div>
+
+          <div>
+            <label
+              for="presenter"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-200"
+              >Presenter</label
+            >
+            <input
+              type="text"
+              id="presenter"
+              v-model="workshopForm.presenter"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            />
+          </div>
+
+          <div class="flex justify-end space-x-2 pt-4">
+            <button
+              type="button"
+              @click="closeModal"
+              class="inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-600"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              {{ modalType === "add" ? "Add Workshop" : "Save Changes" }}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>

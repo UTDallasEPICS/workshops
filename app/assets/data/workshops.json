@@ -1,0 +1,592 @@
+[
+  {
+    "date": "Online",
+    "title": "Browser Dev Tools",
+    "time": "20-minute video",
+    "location": "",
+    "recordingLink": "Link",
+    "note": "WATCH FIRST! If working on a CS project - a must see",
+    "description": "An introduction to the most critical tool for web developers",
+    "presenter": "Joseph Nakonecznyj"
+  },
+  {
+    "date": "Online",
+    "title": "Bash",
+    "time": "16-minute video",
+    "location": "",
+    "recordingLink": "Link",
+    "note": "If working on a CS project - a must see",
+    "description": "Short introduction to Bash scripting language",
+    "presenter": "Joseph Nakonecznyj"
+  },
+  {
+    "date": "Online",
+    "title": "Git",
+    "time": "12-minute video",
+    "location": "",
+    "recordingLink": "Link",
+    "note": "If working on a CS project - a must see",
+    "description": "Brief overview of Git",
+    "presenter": "Joseph Nakonecznyj"
+  },
+  {
+    "date": "Online",
+    "title": "Github",
+    "time": "10-minute video",
+    "location": "",
+    "recordingLink": "Link",
+    "note": "If working on a CS project - a must see",
+    "description": "Introduction/overview of Github",
+    "presenter": "Joseph Nakonecznyj"
+  },
+  {
+    "date": "Online",
+    "title": "Network",
+    "time": "15-minute video",
+    "location": "",
+    "recordingLink": "Link",
+    "note": "If working on a CS project - a must see",
+    "description": "Brief Introduction of client servers, databases, front end, back end, etc.",
+    "presenter": "Joseph Nakonecznyj"
+  },
+  {
+    "date": "22-Jan",
+    "title": "Git and GitHub Basics in person",
+    "time": "7:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "All the basic git concepts, so that will be able to make best use of git for their collaborative work. ",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "23-Jan",
+    "title": "Git and GitHub Basics in person",
+    "time": "5:30 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "All the basic git concepts, so that will be able to make best use of git for their collaborative work. ",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "24-Jan",
+    "title": "Clean Code",
+    "time": "5:30 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Clean code principles based on the book by Robert Cecil Martin. What Clean Code is. Functions. Comments. Formatting. Objects and data structure.",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "25-Jan",
+    "title": "Clean Code",
+    "time": "5:30 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Clean code principles based on the book by Robert Cecil Martin. What Clean Code is. Functions. Comments. Formatting. Objects and data structure.",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "Febru",
+    "title": "Database Design I",
+    "time": "7:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "Recommended if working on a database project",
+    "description": "Introduction and appplications of databases. Difference between SQL and No-SQL DB. Design using ER diagram.",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "30-Jan",
+    "title": "Database Design I",
+    "time": "5:30 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Introduction and appplications of databases. Difference between SQL and No-SQL DB. Design using ER diagram. ",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "31-Jan",
+    "title": "Database Design II",
+    "time": "5:30 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Basic syntaxes of postgresql and will convert the ER diagram in DB-I workshop to actual SQL tables. ",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "1-Feb",
+    "title": "Database Design II",
+    "time": "5:30 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Basic syntaxes of postgresql and will convert the ER diagram in DB-I workshop to actual SQL tables. ",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "2-Feb",
+    "title": "Intro to Computer Aided Design (CAD) I",
+    "time": "7:00 PM",
+    "location": "SPN 1.114",
+    "recordingLink": "",
+    "note": "",
+    "description": "What is CAD. How to obtain and install Fusion 360 and how to use Fusion 360 as well as online resources and tutorials.",
+    "presenter": "Danyal Syed"
+  },
+  {
+    "date": "5-Feb",
+    "title": "Introduction to Java",
+    "time": "5:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Introduction, methods, classes, OOP's concepts, interfaces, wrapper classes, keywords, access modifiers, constructors etc",
+    "presenter": "Margi Nasit"
+  },
+  {
+    "date": "5-Feb",
+    "title": "Nuxt & Vue",
+    "time": "7:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Overview of using Nuxt and Vue to build web applications, covering API and frontend implementation",
+    "presenter": "Joseph Nakonecznyj"
+  },
+  {
+    "date": "6-Feb",
+    "title": "LeetCode",
+    "time": "5:30 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Solve few LeetCode SQL challenges using PostgreSQL",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "6-Feb",
+    "title": "FIGMA",
+    "time": "7:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Introduction to the software, how to use , tools, components, prototyping, auto layout, designing the website etc.",
+    "presenter": "Margi Nasit"
+  },
+  {
+    "date": "7-Feb",
+    "title": "CRUD using Express",
+    "time": "5:30 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Basic setup and how to make CRUD (create, read, update, delete) operations using the PostgreSQL with Prisma as ORM (object relational mapping)",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "8-Feb",
+    "title": "CRUD using Express",
+    "time": "5:30 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Basic setup and how to make CRUD (create, read, update, delete) operations using the PostgreSQL with Prisma as ORM (object relational mapping)",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "8-Feb",
+    "title": "System Architecture & UI Design",
+    "time": "7:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Designing database schemas, APIS, and UI components. Also covers structuring user workflows",
+    "presenter": "Joseph Nakonecznyj"
+  },
+  {
+    "date": "9-Feb",
+    "title": "Intro to Computer Aided Design (CAD) II",
+    "time": "7:00 PM",
+    "location": "SPN 1.114",
+    "recordingLink": "",
+    "note": "",
+    "description": "More in depth overview of Fusion 360 features, includin: simulations, assemblies, and rendering.",
+    "presenter": "Danyal Syed"
+  },
+  {
+    "date": "12-Feb",
+    "title": "FIGMA",
+    "time": "5:30 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Introduction to FIGMA - web-based graphics editing and user interface design app",
+    "presenter": "Mouaadh Bellaouar"
+  },
+  {
+    "date": "12-Feb",
+    "title": "System Architecture & UI Design",
+    "time": "7:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Designing database schemas, APIS, and UI components. Also covers structuring user workflows",
+    "presenter": "Joseph Nakonecznyj"
+  },
+  {
+    "date": "13-Feb",
+    "title": "Marketing your EPICS Experience for Internships",
+    "time": "5:30 PM",
+    "location": "SPN 2.220",
+    "recordingLink": "",
+    "note": "",
+    "description": "This workshop will help you identify and discuss key skills you've learned from EPICS. You will learn how to market and sell your EPICS experience in a way that resonates with future employers and improves your interview skills. Come ready with a top internship/ job choice in mind so we can help you market your EPICS skills directly to a job / internship opening. Or, just come to listen and gain general knowledge about how your time in EPICS can benefit you during job applications and interviews.",
+    "presenter": "Dr. Aird"
+  },
+  {
+    "date": "13-Feb",
+    "title": "CRUD using React",
+    "time": "5:30 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Develop UI in react for the API’s we have developed in CRUD using React. ",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "13-Feb",
+    "title": "Nuxt & Vue",
+    "time": "7:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Overview of using Nuxt and Vue to build web applications, covering API and frontend implementation",
+    "presenter": "Joseph Nakonecznyj"
+  },
+  {
+    "date": "16-Feb",
+    "title": "Intro to Additive Manufacturing",
+    "time": "7:00 PM",
+    "location": "SPN 1.114",
+    "recordingLink": "",
+    "note": "",
+    "description": "We will cover what additive manufacturing is, different styles, different types of material. How do you get something 3D printed? How do we use additive manufacturing in EPICS? Resources at the studio for 3D printing.",
+    "presenter": "Danyal Syed"
+  },
+  {
+    "date": "19-Feb",
+    "title": "State Management in React",
+    "time": "7:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "We will cover all 3 techniques (props, redux and context)",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "20-Feb",
+    "title": "SQL Server and Azure SQL",
+    "time": "4:30 PM",
+    "location": "Virtual",
+    "recordingLink": "http://forms.office.com/r/gYmZWLnQ33",
+    "note": "Register through this link:",
+    "description": "Get started with building web applications using databases and APIs. Go through how to use SQL Server/Azure SQL for a hackathon. Participate in Q&A with the Microsoft Azure Data product team.",
+    "presenter": ""
+  },
+  {
+    "date": "20-Feb",
+    "title": "State Management in React",
+    "time": "5:30 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "We will cover all 3 techniques (props, redux and context)",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "21-Feb",
+    "title": "Intro to Electronics",
+    "time": "6:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Circuits, components, and concepts. Concepts of voltage, current, resistance, and power, and how these behave in series and parallel configurations. Components found in most circuits (resistors, capacitors, inductors, diodes, transistors), elementary circuits (voltage dividers, amplifiers, buck/boost converters, etc.) as well as how these components are used in practical applications by providing examples from actual devices found in commercial products and other hobbyist projects. It will also go over methods of powering a device, and what to consider when choosing a power solution. ",
+    "presenter": "Harold Foster"
+  },
+  {
+    "date": "22-Feb",
+    "title": "Introduction to ES6",
+    "time": "5:30 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Introducing ES6, syntax, functions, restructuring, classes, iterators and generators, promises, string and array methods.",
+    "presenter": "Margi Nasit"
+  },
+  {
+    "date": "23-Feb",
+    "title": "Intro to Design for Additive Manufacturing",
+    "time": "7:00 PM",
+    "location": "SPN 1.114",
+    "recordingLink": "",
+    "note": "",
+    "description": "We will cover how to design for additive manufacturing, including tolerances, holes, overhangs, and other general tips and tricks.",
+    "presenter": "Danyal Syed"
+  },
+  {
+    "date": "26-Feb",
+    "title": "FIGMA",
+    "time": "5:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Introduction to the software, how to use , tools, components, prototyping, auto layout, designing the website etc.",
+    "presenter": "Margi Nasit"
+  },
+  {
+    "date": "28-Feb",
+    "title": "Intro to Soldering",
+    "time": "6:00 PM",
+    "location": "SPN 1.114",
+    "recordingLink": "",
+    "note": "",
+    "description": "Introductory course into soldering. Will demonstrate techniques to achieve clean and robust solder joints for both through hole and surface mount components. The workshop will cover the different types of soldering (soldering with an iron and soldering with paste) and the reasons to choose one over the other. A demonstration of soldering through hole components and surface mount components will be led. There will also be a demonstration on how to desolder components from a board. ",
+    "presenter": "Harold Foster"
+  },
+  {
+    "date": "29-Feb",
+    "title": "Intro to Electronics",
+    "time": "5:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Circuits, components, and concepts. Concepts of voltage, current, resistance, and power, and how these behave in series and parallel configurations. Components found in most circuits (resistors, capacitors, inductors, diodes, transistors), elementary circuits (voltage dividers, amplifiers, buck/boost converters, etc.) as well as how these components are used in practical applications by providing examples from actual devices found in commercial products and other hobbyist projects. It will also go over methods of powering a device, and what to consider when choosing a power solution. ",
+    "presenter": "Harold Foster"
+  },
+  {
+    "date": "1-Mar",
+    "title": "Intro to Computer Aided Design (CAD) I",
+    "time": "7:00 PM",
+    "location": "SPN 1.114",
+    "recordingLink": "",
+    "note": "",
+    "description": "What is CAD. How to obtain and install Fusion 360 and how to use Fusion 360 as well as online resources and tutorials.",
+    "presenter": "Danyal Syed"
+  },
+  {
+    "date": "4-Mar",
+    "title": "Introduction to ES6",
+    "time": "5:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Introducing ES6, syntax, functions, restructuring, classes, iterators and generators, promises, string and array methods.",
+    "presenter": "Margi Nasit"
+  },
+  {
+    "date": "4-Mar",
+    "title": "LeetCode",
+    "time": "7:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Solve few LeetCode SQL challenges using PostgreSQL",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "6-Mar",
+    "title": "PCB",
+    "time": "6:00 PM",
+    "location": "SPN 1.114",
+    "recordingLink": "",
+    "note": "",
+    "description": "An example of 2 layer printed circuit board (PCB) design in KiCAD will be done. We will lay out a circuit schematic and then go through the process of converting the schematic to a PCB.",
+    "presenter": "Harold Foster"
+  },
+  {
+    "date": "6-Mar",
+    "title": "Collecting Data for Machine Learning Models",
+    "time": "7:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Learn the fundamentals of machine learning - from clustering to neural networks. This workshop will also focus on training and evaluation of machine learning models (gathering training data, splitting up training data into subsets, finding quality training data, data augmentation)",
+    "presenter": "Dr. Aird"
+  },
+  {
+    "date": "7-Mar",
+    "title": "Intro to Soldering",
+    "time": "6:00 PM",
+    "location": "SPN 1.114",
+    "recordingLink": "",
+    "note": "",
+    "description": "Introductory course into soldering. Will demonstrate techniques to achieve clean and robust solder joints for both through hole and surface mount components. The workshop will cover the different types of soldering (soldering with an iron and soldering with paste) and the reasons to choose one over the other. A demonstration of soldering through hole components and surface mount components will be led. There will also be a demonstration on how to desolder components from a board. ",
+    "presenter": "Harold Foster"
+  },
+  {
+    "date": "8-Mar",
+    "title": "Intro to Computer Aided Design (CAD) II",
+    "time": "7:00 PM",
+    "location": "SPN 1.114",
+    "recordingLink": "",
+    "note": "",
+    "description": "More in depth overview of Fusion 360 features, includin: simulations, assemblies, and rendering.",
+    "presenter": "Danyal Syed"
+  },
+  {
+    "date": "18-Mar",
+    "title": "Cloud Services & Deploying Code",
+    "time": "7:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "Very much recommended for teams exploring cloud services",
+    "description": "An overview of cloud services focusing on AWS and deploying your projects - git, github, AWS, CDNs, domains",
+    "presenter": "Joseph Nakonecznyj"
+  },
+  {
+    "date": "20-Mar",
+    "title": "PCB",
+    "time": "6:00 PM",
+    "location": "SPN 1.114",
+    "recordingLink": "",
+    "note": "",
+    "description": "An example of 2 layer printed circuit board (PCB) design in KiCAD will be done. We will lay out a circuit schematic and then go through the process of converting the schematic to a PCB.",
+    "presenter": "Max Steele"
+  },
+  {
+    "date": "21-Mar",
+    "title": "Cloud Services & Deploying Code",
+    "time": "7:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "Very much recommended for teams exploring cloud services",
+    "description": "An overview of cloud services focusing on AWS and deploying your projects - git, github, AWS, CDNs, domains",
+    "presenter": "Joseph Nakonecznyj"
+  },
+  {
+    "date": "",
+    "title": "IEEE Soldering",
+    "time": "5:00 PM",
+    "location": "SPN 2.220",
+    "recordingLink": "",
+    "note": "Reapeted every other Friday",
+    "description": "Begginer friendly",
+    "presenter": "IEEE"
+  },
+  {
+    "date": "",
+    "title": "IEEE Microcontroler",
+    "time": "5:00 PM",
+    "location": "SPN 2.220",
+    "recordingLink": "",
+    "note": "Reapeted every other Thursday",
+    "description": "Begginer friendly",
+    "presenter": "IEEE"
+  },
+  {
+    "date": "22-Mar",
+    "title": "Intro to Additive Manufacturing",
+    "time": "5:00 PM",
+    "location": "SPN 1.114",
+    "recordingLink": "",
+    "note": "",
+    "description": "We will cover what additive manufacturing is, different styles, different types of material. How do you get something 3D printed? How do we use additive manufacturing in EPICS? Resources at the studio for 3D printing.",
+    "presenter": "Danyal Syed"
+  },
+  {
+    "date": "22-Mar",
+    "title": "Intro to Design for Additive Manufacturing",
+    "time": "7:00 PM",
+    "location": "SPN 1.114",
+    "recordingLink": "",
+    "note": "",
+    "description": "We will cover how to design for additive manufacturing, including tolerances, holes, overhangs, and other general tips and tricks.",
+    "presenter": "Danyal Syed"
+  },
+  {
+    "date": "25-Mar",
+    "title": "CRUD using React",
+    "time": "7:30pm",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Develop UI in react for the API’s we have developed in CRUD using React. ",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "",
+    "title": "Go Introduction",
+    "time": "7:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "We will cover all the syntax that is needed to get started with Go",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "",
+    "title": "Go Introduction",
+    "time": "5:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "We will cover all the syntax that is needed to get started with Go",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "",
+    "title": "LeetCode with Go",
+    "time": "5:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Solve few leetcode questions in Go.",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "29-Feb",
+    "title": "LeetCode with Go",
+    "time": "6:00 PM",
+    "location": "SPN 1.121",
+    "recordingLink": "",
+    "note": "",
+    "description": "Solve few leetcode questions in go. ",
+    "presenter": "Navaneeth Buddi"
+  },
+  {
+    "date": "T, TH and Sat.",
+    "title": "Machine Shop Training",
+    "time": "T &TH: 5pm-9pm Sat: 12pm-4pm Each training session last between 1-2 hours",
+    "location": "SPN 1.110",
+    "recordingLink": "",
+    "note": "Must have completed saftey training via Bioraft Very much recommended if planning to use the machine shop now or in the future",
+    "description": "Each session counts as one workshop. 5 session series (1 session per day) basic tool traininig done in shop. Must provide safety training certificates to Gene prior to coming to basic training. Long pants and closed shoes must be worn.",
+    "presenter": "Gene Woten"
+  },
+  {
+    "date": "",
+    "title": "North Lab Machine Shop",
+    "time": "By appointment. After completing the online training, send email to Andrew Bittner to schedule training. andrew.bittner@utdallas.edu",
+    "location": "North Lab (NL)",
+    "recordingLink": "",
+    "note": "Very much recommended if planning to use the North Lab Machine Shop now or in the future",
+    "description": "Prior to scheduled a training session, students must complete the following BioRaft online training: 1) Hand and Power Tool Safety Course 2) General Safety Course 3) Personal Protective Equipment Course 4) Machine Shop Safety and Procedures Course",
+    "presenter": "Andrew Bittner"
+  },
+  {
+    "date": "Online",
+    "title": "Linkedln Learning",
+    "time": "Online",
+    "location": "https://www.utdallas.edu/library/utdlynda/",
+    "recordingLink": "",
+    "note": "very much recommended when looking to learn topics not offered through our workshops",
+    "description": "Find online courses based on your need",
+    "presenter": "UT Dallas"
+  }
+]
