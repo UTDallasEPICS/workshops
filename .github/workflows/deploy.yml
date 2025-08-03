@@ -1,28 +1,26 @@
+# https://github.com/actions/deploy-pages#usage
 name: Deploy to GitHub Pages
 on:
   workflow_dispatch:
   push:
     branches:
       - main
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: corepack enable # Enable corepack for pnpm support
+      - run: corepack enable
       - uses: actions/setup-node@v4
         with:
-          node-version: "20" # Ensure this matches your project's Node.js version if you have specific requirements
-
+          node-version: "20"
       # Pick your own package manager and build script
       - run: pnpm install
-      - run: pnpm run build
+      - run: pnpm dlx nuxt build --preset github_pages
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./.output/public # This is the directory containing your static Nuxt output
-
+          path: ./.output/public
   # Deployment job
   deploy:
     # Add a dependency to the build job
@@ -31,7 +29,7 @@ jobs:
     permissions:
       pages: write # to deploy to Pages
       id-token: write # to verify the deployment originates from an appropriate source
-    # Deploy to the github-pages environment
+    # Deploy to the github_pages environment
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
