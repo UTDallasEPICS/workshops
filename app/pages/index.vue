@@ -1,5 +1,6 @@
 <script setup>
 import initialWorkshops from "~/assets/data/workshops.json";
+import rsvpData from "~/assets/data/rsvp.json"; // Import RSVP data
 
 const workshops = ref(
   initialWorkshops.map((w) => ({
@@ -7,6 +8,20 @@ const workshops = ref(
     id: w.id || Date.now() + Math.random(),
   }))
 );
+
+// Convert RSVP data into a more usable format (e.g., array of names)
+const rsvps = computed(() => {
+  const processedRsvps = {};
+  for (const title in rsvpData) {
+    if (Object.prototype.hasOwnProperty.call(rsvpData, title)) {
+      processedRsvps[title] = rsvpData[title]
+        .split(",")
+        .map((name) => name.trim())
+        .filter((name) => name.length > 0);
+    }
+  }
+  return processedRsvps;
+});
 
 const isModalOpen = ref(false);
 const modalType = ref("add"); // 'add' or 'edit'
@@ -133,7 +148,7 @@ const closeModal = () => {
             <th scope="col" class="px-6 py-3">Note</th>
             <th scope="col" class="px-6 py-3">Workshop Description</th>
             <th scope="col" class="px-6 py-3">Presenter</th>
-            <!-- Actions column only visible in editing mode -->
+            <th scope="col" class="px-6 py-3">RSVP</th>
             <th v-if="isEditingMode" scope="col" class="px-6 py-3">Actions</th>
           </tr>
         </thead>
@@ -167,6 +182,21 @@ const closeModal = () => {
             <td class="px-6 py-4">{{ workshop.note }}</td>
             <td class="px-6 py-4">{{ workshop.description }}</td>
             <td class="px-6 py-4">{{ workshop.presenter }}</td>
+            <td class="px-6 py-4">
+              <div
+                v-if="rsvps[workshop.title] && rsvps[workshop.title].length > 0"
+              >
+                <template
+                  v-for="(attendee, idx) in rsvps[workshop.title]"
+                  :key="attendee"
+                >
+                  {{ attendee }}
+                  <span v-if="idx < rsvps[workshop.title].length - 1">, </span>
+                </template>
+              </div>
+              <span v-else class="text-gray-400">N/A</span>
+            </td>
+
             <!-- Edit/Delete buttons only visible in editing mode -->
             <td
               v-if="isEditingMode"
@@ -179,14 +209,17 @@ const closeModal = () => {
                 title="Edit"
               >
                 <svg
-                  class="h-4 w-4"
                   xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-4"
                 >
                   <path
-                    d="M5.433 13.917l1.326-4.508a.75.75 0 011.174-.298l.635.635a.75.75 0 001.06-.006l6.762-6.762a.75.75 0 00-1.06-1.06L9.605 10.04a.75.75 0 00-.006 1.06l.635.635a.75.75 0 01-.298 1.174l-4.508 1.326a.75.75 0 01-.913-.913zM6.5 16.5H4.25A2.25 2.25 0 012 14.25V4.75A2.25 2.25 0 014.25 2.5h9.5A2.25 2.25 0 0116 4.75v2.25a.75.75 0 001.5 0V4.75A3.75 3.75 0 0013.75 1H4.25A3.75 3.75 0 00.5 4.75v9.5A3.75 3.75 0 004.25 18.5h2.25a.75.75 0 000-1.5z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
                   />
                 </svg>
               </button>
@@ -197,21 +230,17 @@ const closeModal = () => {
                 title="Delete"
               >
                 <svg
-                  class="h-4 w-4"
                   xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-4"
                 >
                   <path
-                    fill-rule="evenodd"
-                    d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.58.274-2.333.586a.75.75 0 00-.737 1.107L4.547 9.5H15.453l1.838-3.614a.75.75 0 00-.737-1.107c-.753-.312-1.538-.509-2.333-.586V3.75C14 2.134 12.866 1 11.25 1h-2.5zM10 11.25a.75.75 0 00-1.5 0v3.5a.75.75 0 001.5 0v-3.5z"
-                    clip-rule="evenodd"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    d="M4.505 11.147A.75.75 0 004 11.75v2.5c0 .138-.112.25-.25.25H2.75a.75.75 0 00-.75.75v.5c0 .414.336.75.75.75h14.5a.75.75 0 00.75-.75v-.5a.75.75 0 00-.75-.75h-1a.25.25 0 01-.25-.25v-2.5a.75.75 0 00-.455-.603L12.5 9h-5L4.505 11.147zM6.5 11.25a.75.75 0 00-1.5 0v3.5a.75.75 0 001.5 0v-3.5z"
-                    clip-rule="evenodd"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
                   />
                 </svg>
               </button>
